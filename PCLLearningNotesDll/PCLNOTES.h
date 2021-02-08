@@ -11,4 +11,6 @@ namespace PCLNOTES {
 
 	extern "C" PCLNOTES_API int narf_keypoint_extraction(int argc, char* argv[]);
 	extern "C" PCLNOTES_API int random_sample_consensus(int argc, char* argv[]);
+	extern "C" PCLNOTES_API int normal_estimation();
+	extern "C" PCLNOTES_API int pfh_estimation();
 }

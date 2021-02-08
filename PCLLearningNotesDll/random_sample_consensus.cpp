@@ -42,7 +42,6 @@ extern "C" PCLNOTES_API int random_sample_consensus(int argc, char* argv[])
 	cloud->points.resize(cloud->width * cloud->height);
 	for (pcl::index_t i = 0; i < cloud->size(); ++i)
 	{
-		cout << pcl::console::find_argument(argc, argv, "-s");
 		if (pcl::console::find_argument(argc, argv, "-s") >= 0 || pcl::console::find_argument(argc, argv, "-sf") >= 0)
 		{
 			(*cloud)[i].x = 1024 * rand() / (RAND_MAX + 1.0);
