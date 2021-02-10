@@ -2,9 +2,11 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/registration/icp.h>
+#include "../PCLLearningNotesDll/PCLNOTES.h"
 
-int
-main(int argc, char** argv) {
+using namespace PCLNOTES;
+
+extern "C" PCLNOTES_API int iterative_closest_point() {
     // 定义输入和输出点云
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>);

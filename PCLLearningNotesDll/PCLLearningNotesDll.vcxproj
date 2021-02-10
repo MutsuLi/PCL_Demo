@@ -172,6 +172,7 @@
     <ClCompile Include="..\PclDemo\narf_keypoint_extraction.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="iterative_closest_point.cpp" />
+    <ClCompile Include="normal_distributions_transform .cpp" />
     <ClCompile Include="normal_estimation.cpp" />
     <ClCompile Include="PassThrough.cpp" />
     <ClCompile Include="pfh_estimation.cpp" />

@@ -32,8 +32,13 @@ int main(int argc, char* argv[])
 	//normal_estimation();
 
 	//8.特征检测与描述子
+	//pfh_estimation();
 
-	pfh_estimation();
+	//9.迭代最近点算法(ICP)
+	//iterative_closest_point();
+
+	char* param1[] = { argv[0],(char*)"-sf" };
+	normal_distributions_transform(argc + 1, param1);
 
 
 }
