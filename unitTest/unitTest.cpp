@@ -8,10 +8,33 @@ using namespace PCLNOTES;
 
 int main(int argc, char* argv[])
 {
-	//narf_keypoint_extraction(argc, argv);
 	//char* param1[] = { argv[0],(char*)"-sf" };
-	//random_sample_consensus(argc+1, param1);
+
+	//3. 点云滤波
+	//char* param1[] = { argv[0],(char*)"-r" };
+	//remove_outliers(argc + 1, param1);
+	//PassThrough();
+	//downsample_voxel_grid();
+	//StatisticalOutlierRemoval();
+
+	//4. 深度图
+	//char* param2[] = { argv[0],(char*)"-m",(char*)"C:\\Users\\admin\\Desktop\\ply\\shoeselected.pcd" };
+	//range_image_border(argc + 2, param2);
+
+	//5. 关键点
+	//narf_keypoint_extraction(argc, argv);
+
+	//6. 随机采样一致性算法
+	//char* param1[] = { argv[0],(char*)"-sf" };
+	//random_sample_consensus(argc + 1, param1);
+
+	//7. 法向量估计
 	//normal_estimation();
+
+	//8.特征检测与描述子
+
 	pfh_estimation();
+
+
 }
 

@@ -15,19 +15,22 @@ using namespace PCLNOTES;
 using namespace std;
 typedef pcl::PointXYZ PointType;
 
-// --------------------
-// -----Parameters-----
-// --------------------
-float angular_resolution = 0.5f;
-float support_size = 0.2f;
-pcl::RangeImage::CoordinateFrame coordinate_frame = pcl::RangeImage::CAMERA_FRAME;
-bool setUnseenToMaxRange = false;
+
 
 // --------------
 // -----Help-----
 // --------------
 void printUsage(const char* progName)
 {
+	// --------------------
+	// -----Parameters-----
+	// --------------------
+
+	float angular_resolution = 0.5f;
+	float support_size = 0.2f;
+	pcl::RangeImage::CoordinateFrame coordinate_frame = pcl::RangeImage::CAMERA_FRAME;
+	bool setUnseenToMaxRange = false;
+
 	std::cout << "\n\nUsage: " << progName << " [options] <scene.pcd>\n\n"
 		<< "Options:\n"
 		<< "-------------------------------------------\n"
@@ -56,6 +59,14 @@ void printUsage(const char* progName)
 // --------------
 extern "C" PCLNOTES_API int narf_keypoint_extraction(int argc, char* argv[])
 {
+	// --------------------
+	// -----Parameters-----
+	// --------------------
+
+	float angular_resolution = 0.5f;
+	float support_size = 0.2f;
+	pcl::RangeImage::CoordinateFrame coordinate_frame = pcl::RangeImage::CAMERA_FRAME;
+	bool setUnseenToMaxRange = false;
 	// --------------------------------------
 	// -----Parse Command Line Arguments-----
 	// --------------------------------------
@@ -91,7 +102,7 @@ extern "C" PCLNOTES_API int narf_keypoint_extraction(int argc, char* argv[])
 	//std::vector<int> pcd_filename_indices = pcl::console::parse_file_extension_argument(argc, argv, "pcd");
 	//if (!pcd_filename_indices.empty())
 	//{
-	std::string filename = "C:\\Users\\admin\\Desktop\\ply\\ObjectModel3DInternaledge.pcd";//argv[pcd_filename_indices[0]];
+	std::string filename = "C:\\Users\\admin\\Desktop\\ply\\20210111152624.pcd";//argv[pcd_filename_indices[0]];
 	setUnseenToMaxRange = true;
 	if (pcl::io::loadPCDFile(filename, point_cloud) == -1)
 	{
@@ -144,7 +155,7 @@ extern "C" PCLNOTES_API int narf_keypoint_extraction(int argc, char* argv[])
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointWithRange> range_image_color_handler(range_image_ptr, 0, 0, 0);
 	viewer.addPointCloud(range_image_ptr, range_image_color_handler, "range image");
 	viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "range image");
-	viewer.addCoordinateSystem (1.0f, "global");
+	viewer.addCoordinateSystem(1.0f, "global");
 	//PointCloudColorHandlerCustom<PointType> point_cloud_color_handler (point_cloud_ptr, 150, 150, 150);
 	//viewer.addPointCloud (point_cloud_ptr, point_cloud_color_handler, "original point cloud");
 	viewer.initCameraParameters();

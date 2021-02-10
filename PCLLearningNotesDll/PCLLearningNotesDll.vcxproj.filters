@@ -38,5 +38,14 @@
     <ClCompile Include="pfh_estimation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="iterative_closest_point.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="range_image_border.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PassThrough.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

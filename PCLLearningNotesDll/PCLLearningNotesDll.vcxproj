@@ -171,9 +171,12 @@
   <ItemGroup>
     <ClCompile Include="..\PclDemo\narf_keypoint_extraction.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="iterative_closest_point.cpp" />
     <ClCompile Include="normal_estimation.cpp" />
+    <ClCompile Include="PassThrough.cpp" />
     <ClCompile Include="pfh_estimation.cpp" />
     <ClCompile Include="random_sample_consensus.cpp" />
+    <ClCompile Include="range_image_border.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

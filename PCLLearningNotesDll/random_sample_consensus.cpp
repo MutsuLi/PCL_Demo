@@ -36,7 +36,7 @@ extern "C" PCLNOTES_API int random_sample_consensus(int argc, char* argv[])
 	pcl::PointCloud<pcl::PointXYZ>::Ptr final(new pcl::PointCloud<pcl::PointXYZ>);
 
 	// populate our PointCloud with points
-	cloud->width = 500;
+	cloud->width = 1000;
 	cloud->height = 1;
 	cloud->is_dense = false;
 	cloud->points.resize(cloud->width * cloud->height);
@@ -46,7 +46,7 @@ extern "C" PCLNOTES_API int random_sample_consensus(int argc, char* argv[])
 		{
 			(*cloud)[i].x = 1024 * rand() / (RAND_MAX + 1.0);
 			(*cloud)[i].y = 1024 * rand() / (RAND_MAX + 1.0);
-			if (i % 5 == 0)
+			if (i % 3== 0)
 				(*cloud)[i].z = 1024 * rand() / (RAND_MAX + 1.0);
 			else if (i % 2 == 0)
 				(*cloud)[i].z = sqrt(1 - ((*cloud)[i].x * (*cloud)[i].x)

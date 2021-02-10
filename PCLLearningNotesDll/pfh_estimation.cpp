@@ -11,13 +11,17 @@
 #include <pcl/features/normal_3d.h>
 #include "../PCLLearningNotesDll/PCLNOTES.h"
 #include <pcl/features/normal_3d_omp.h>
+#include <pcl/point_types.h>
+#include <pcl/features/fpfh.h>
+#include <pcl/features/fpfh_omp.h>
+using namespace pcl;
 
 using namespace PCLNOTES;
 extern "C" PCLNOTES_API int pfh_estimation() {
 	// load point cloud
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 	//    pcl::io::loadPCDFile("./data/target.pcd", *cloud);
-	pcl::io::loadPCDFile("C:\\Users\\admin\\Desktop\\ply\\bunny.pcd", *cloud);
+	pcl::io::loadPCDFile("C:\\Users\\admin\\Desktop\\ply\\shoeselected.pcd", *cloud);
 
 	// estimate normals ------------------------------------------------------------- 计算法向量
 	pcl::PointCloud<pcl::Normal>::Ptr normals(new pcl::PointCloud<pcl::Normal>);
@@ -30,41 +34,37 @@ extern "C" PCLNOTES_API int pfh_estimation() {
 	// For every point, use all neighbors in a radius of 3cm.
 	normalEstimation.setRadiusSearch(1);
 
+	normalEstimation.compute(*normals);
 	// A kd-tree is a data structure that makes searches efficient. More about it later.
 	// The normal estimation object will use it to find nearest neighbors.
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr kdtree(new pcl::search::KdTree<pcl::PointXYZ>);
-	normalEstimation.setSearchMethod(kdtree);
-	// Calculate the normals.
-	normalEstimation.compute(*normals);
 
-	// Create the PFH estimation class, and pass the input dataset+normals to it ------计算PFH直方图
-	pcl::PFHEstimation<pcl::PointXYZ, pcl::Normal, pcl::PFHSignature125> pfh;
-	pfh.setInputCloud(cloud);
-	pfh.setInputNormals(normals);
-	// alternatively, if cloud is of tpe PointNormal, do pfh.setInputNormals (cloud);
+	// Create the FPFH estimation class, and pass the input dataset+normals to it
+	FPFHEstimationOMP<pcl::PointXYZ, pcl::Normal, pcl::FPFHSignature33> fpfh;
+	fpfh.setNumberOfThreads(10);
+	fpfh.setInputCloud(cloud);
+	fpfh.setInputNormals(normals);
+	// alternatively, if cloud is of tpe PointNormal, do fpfh.setInputNormals (cloud);
 
-	// Create an empty kdtree representation, and pass it to the PFH estimation object.
+	// Create an empty kdtree representation, and pass it to the FPFH estimation object.
 	// Its content will be filled inside the object, based on the given input dataset (as no other search surface is given).
-	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
-	//pcl::KdTreeFLANN<pcl::PointXYZ>::Ptr tree (new pcl::KdTreeFLANN<pcl::PointXYZ> ()); -- older call for PCL 1.5-
-	pfh.setSearchMethod(tree);
+	pcl::search::KdTree<PointXYZ>::Ptr tree(new pcl::search::KdTree<PointXYZ>);
+
+	fpfh.setSearchMethod(tree);
 
 	// Output datasets
-	pcl::PointCloud<pcl::PFHSignature125>::Ptr pfhs(new pcl::PointCloud<pcl::PFHSignature125>());
+	pcl::PointCloud<pcl::FPFHSignature33>::Ptr fpfhs(new pcl::PointCloud<pcl::FPFHSignature33>());
 
 	// Use all neighbors in a sphere of radius 5cm
-	// 使用一个半径为5厘米的球体，作为搜索邻域
 	// IMPORTANT: the radius used here has to be larger than the radius used to estimate the surface normals!!!
-	// 重点： 半径必须要比用于估算法向量的邻域半径要大
-	pfh.setRadiusSearch(2);
+	fpfh.setRadiusSearch(2);
 
 	// Compute the features
-	pfh.compute(*pfhs);
+	fpfh.compute(*fpfhs);
 
-	unsigned long size = pfhs->points.size();
+	unsigned long size = fpfhs->points.size();
 	for (int j = 0; j < size; ++j) {
-		pcl::PFHSignature125& signature125 = pfhs->points[j];
-		float* h = signature125.histogram;
+		pcl::FPFHSignature33& signature33 = fpfhs->points[j];
+		float* h = signature33.histogram;
 
 		printf("%d: %f,%f,%f \n", j, h[1], h[2], h[3]);
 	}
@@ -72,7 +72,7 @@ extern "C" PCLNOTES_API int pfh_estimation() {
 	// visualize normals
 	pcl::visualization::PCLVisualizer viewer("PCL Viewer");
 	viewer.setBackgroundColor(0.0, 0.0, 0.5);
-	viewer.addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud, normals, 1, 0.01, "normals");
+	viewer.addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud, normals, 1, 0.5, "normals");
 
 	while (!viewer.wasStopped()) {
 		viewer.spinOnce();
