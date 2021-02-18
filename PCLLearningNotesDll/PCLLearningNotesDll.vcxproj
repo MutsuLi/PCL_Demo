@@ -170,14 +170,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PclDemo\narf_keypoint_extraction.cpp" />
+    <ClCompile Include="alignment_prerejective.cpp" />
+    <ClCompile Include="cluster_extraction.cpp" />
+    <ClCompile Include="cylinder_segmentation.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="interactive_icp.cpp" />
     <ClCompile Include="iterative_closest_point.cpp" />
+    <ClCompile Include="moment_of_inertia.cpp" />
     <ClCompile Include="normal_distributions_transform .cpp" />
     <ClCompile Include="normal_estimation.cpp" />
     <ClCompile Include="PassThrough.cpp" />
     <ClCompile Include="pfh_estimation.cpp" />
+    <ClCompile Include="planar_segmentation.cpp" />
     <ClCompile Include="random_sample_consensus.cpp" />
     <ClCompile Include="range_image_border.cpp" />
+    <ClCompile Include="template_alignment.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

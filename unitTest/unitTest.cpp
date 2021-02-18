@@ -37,9 +37,26 @@ int main(int argc, char* argv[])
 	//9.迭代最近点算法(ICP)
 	//iterative_closest_point();
 
-	char* param1[] = { argv[0],(char*)"-sf" };
-	normal_distributions_transform(argc + 1, param1);
+	//char* param1[] = { argv[0],(char*)"-sf" };
+	//normal_distributions_transform(argc + 1, param1);
 
+	//char* param2[] = { argv[0],(char*)"../data/chef.pcd",(char*)"../data/rs1.pcd" };
+	//alignment_prerejective(argc + 2, param2);
+
+	//char* param2[] = { argv[0],(char*)"../data/monkey.ply" ,(char*)"1" };
+	//interactive_icp(argc + 2, param2);
+
+	//planar_segmentation();
+
+	//cylinder_segmentation();
+
+	//cluster_extraction();
+
+	//char* param3[] = { argv[0],(char*)"../data/milk_color.pcd" };
+	//moment_of_inertia(argc+1, param3);
+
+	char* param4[] = { argv[0],(char*)"../data/object_templates2.txt",(char*)"../data/milk_color.pcd" };
+	template_alignment(argc + 1, param4);
 
 }
 

@@ -50,5 +50,26 @@
     <ClCompile Include="normal_distributions_transform .cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="alignment_prerejective.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="interactive_icp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="planar_segmentation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cylinder_segmentation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="cluster_extraction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="moment_of_inertia.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="template_alignment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
